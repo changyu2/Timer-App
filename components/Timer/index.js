@@ -1,4 +1,6 @@
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators as Actions } from "../../reducer";
 import Timer from "./presenter";
 
 function mapStateToProps(state) {
@@ -10,4 +12,14 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Timer);
+function mapDispatchToProps(dispatch) {
+  return {
+    startTimer: bindActionCreators(Actions.startTimer, dispatch),
+    restartTimer: bindActionCreators(Actions.restartTimer, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Timer);
